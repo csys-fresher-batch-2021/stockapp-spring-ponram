@@ -1,5 +1,7 @@
 package in.ponram.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -27,5 +29,14 @@ public class ProductManager {
 			added = productRepository.save(product);
 		}
 		return added;
+	}
+	
+	/**
+	 * Get all the stocks from the data base
+	 * @return all the products in the stock
+	 */
+	public List<Product> getAllStock() {
+
+		return productRepository.findAll();
 	}
 }

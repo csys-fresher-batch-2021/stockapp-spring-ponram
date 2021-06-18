@@ -1,8 +1,11 @@
 package in.ponram.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,6 +22,12 @@ public class ProductController {
 	@Autowired
 	private ProductManager manager;
 
+	/**
+	 * Post method
+	 * http://localhost:9090/Products
+	 * @param product
+	 * @return
+	 */
 	@PostMapping
 	public ResponseEntity<Message> saveProduct(@RequestBody Product product) {
 
@@ -33,4 +42,16 @@ public class ProductController {
 		}
 		return new ResponseEntity<>(message, httpStatus);
 	}
+	
+	/**
+	 * Get method
+	 * http://localhost:9090/Products
+	 * @param product
+	 * @return
+	 */
+	@GetMapping
+	public List<Product> displayProducts() {
+		return manager.getAllStock();
+	}
+	
 }
