@@ -31,7 +31,7 @@ public class ProductRepository {
 		return isSaved == 1 ? true : false;
 
 	}
-	
+
 	/**
 	 * This method is used to get all the product from database
 	 * 
@@ -45,5 +45,18 @@ public class ProductRepository {
 		productList = jdbcTemplate.query(sql, new BeanPropertyRowMapper<Product>(Product.class));
 
 		return productList;
+	}
+
+	/**
+	 * This method is used to remove the product from the database
+	 * 
+	 * @return
+	 */
+	public boolean remove(Integer id) {
+
+		String sql = "UPDATE stock SET active = false WHERE product_id = ?;";
+
+		int isUpdated = jdbcTemplate.update(sql, id);
+		return isUpdated == 1 ? true : false;
 	}
 }

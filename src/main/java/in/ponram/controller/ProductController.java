@@ -5,7 +5,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,8 +25,8 @@ public class ProductController {
 	private ProductManager manager;
 
 	/**
-	 * Post method
-	 * http://localhost:9090/Products
+	 * Post method http://localhost:9090/Products
+	 * 
 	 * @param product
 	 * @return
 	 */
@@ -42,10 +44,10 @@ public class ProductController {
 		}
 		return new ResponseEntity<>(message, httpStatus);
 	}
-	
+
 	/**
-	 * Get method
-	 * http://localhost:9090/Products
+	 * Get method http://localhost:9090/Products
+	 * 
 	 * @param product
 	 * @return
 	 */
@@ -53,5 +55,27 @@ public class ProductController {
 	public List<Product> displayProducts() {
 		return manager.getAllStock();
 	}
-	
+
+	/**
+	 * http://localhost:9090/Products/{id}/Remove
+	 * 
+	 * @param id
+	 * @return
+	 */
+	@DeleteMapping("{id}/Remove")
+	public ResponseEntity<Message> removeProduct(@PathVariable("id") int id) {
+
+		boolean isDeleted = manager.deleteProduct(id);
+		Message message = new Message();
+		HttpStatus httpStatus;
+		if (isDeleted) {
+			message.setInfoMessage("Removed successfuly");
+			httpStatus = HttpStatus.OK;
+		} else {
+			message.setErrorMessage("Can't able to remove");
+			httpStatus = HttpStatus.BAD_REQUEST;
+		}
+		return new ResponseEntity<>(message, httpStatus);
+	}
+
 }
