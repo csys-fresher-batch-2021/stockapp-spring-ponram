@@ -1,5 +1,8 @@
 package in.ponram.util;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import in.ponram.exception.UtilException;
 
 public class NumberValidator {
@@ -51,6 +54,25 @@ public class NumberValidator {
 			return Long.parseLong(input);
 		} catch (NumberFormatException e) {
 			throw new UtilException(errorMessage);
+		}
+	}
+	
+	/**
+	 * Mobile number should not be empty Mobile number should be starting digit in 6
+	 * to 9 After 9 number should be any digit between 0 to 9
+	 * 
+	 * @param mobileNumber
+	 * @return true or false
+	 */
+	public static boolean isValidMobileNumber(String mobileNumber) {
+
+		Pattern p = Pattern.compile("[6-9][0-9]{9}");
+		Matcher m = p.matcher(mobileNumber);
+		if (m.matches()) {
+
+			return true;
+		} else {
+			throw new UtilException("Mobile number format is invalid");
 		}
 	}
 
