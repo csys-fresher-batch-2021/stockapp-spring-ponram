@@ -58,4 +58,21 @@ public class ProductManager {
 		}
 		return success;
 	}
+
+	/**
+	 * This method is used to used to increase the quantity of particular product
+	 * 
+	 * @param id
+	 * @param quantity
+	 */
+	public boolean increaseQuantity(int id, int quantity) {
+
+		boolean success = false;
+		if (ProductValidation.valid(id, quantity)) {
+
+			success = productRepository.updateQuantity(id, quantity);
+		}
+
+		return success;
+	}
 }

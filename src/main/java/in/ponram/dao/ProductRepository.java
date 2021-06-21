@@ -59,4 +59,19 @@ public class ProductRepository {
 		int isUpdated = jdbcTemplate.update(sql, id);
 		return isUpdated == 1 ? true : false;
 	}
+	
+	/**
+	 * This method is used to update product quantity by using product id from
+	 * database
+	 * 
+	 * @param brand
+	 * @return
+	 * @return
+	 */
+	public boolean updateQuantity(int id, int quantity) {
+
+		String sql = "update stock set initial_quantity = initial_quantity + ?, available_quantity = available_quantity + ? where product_id = ?";
+		int isUpdated = jdbcTemplate.update(sql, quantity, quantity, id);
+		return isUpdated == 1 ? true : false;
+	}
 }
