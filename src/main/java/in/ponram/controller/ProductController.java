@@ -59,7 +59,7 @@ public class ProductController {
 	}
 
 	/**
-	 * http://localhost:9090/Products/{id}/Remove
+	 * Delete method http://localhost:9090/Products/{id}/Remove
 	 * 
 	 * @param id
 	 * @return
@@ -81,7 +81,7 @@ public class ProductController {
 	}
 	
 	/**
-	 * http://localhost:9090/Products/Add?id=1&quantity=10
+	 * Patch method http://localhost:9090/Products/Add?id=1&quantity=10
 	 * 
 	 * @param id
 	 * @return

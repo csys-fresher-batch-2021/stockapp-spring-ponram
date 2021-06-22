@@ -28,7 +28,7 @@ public class ProductRepository {
 				Date.valueOf(product.getArrivalDate()), product.getAvailableQuantity(), product.getAvailableQuantity(),
 				product.getRate() };
 		int isSaved = jdbcTemplate.update(sql, params);
-		return isSaved == 1 ? true : false;
+		return isSaved == 1 ? true :false;
 
 	}
 
