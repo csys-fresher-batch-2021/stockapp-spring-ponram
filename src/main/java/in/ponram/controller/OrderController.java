@@ -15,7 +15,7 @@ import in.ponram.model.OrderItem;
 import in.ponram.service.OrderManager;
 
 @RestController
-@RequestMapping("order")
+@RequestMapping("api/v1/order")
 public class OrderController {
 
 	@Autowired

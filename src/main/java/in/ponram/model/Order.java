@@ -11,7 +11,7 @@ public class Order {
 	private int billNumber;
 	private String username;
 	private List<OrderItem> orderDetails;
-//	private OrderItem orderDetail;
+	private OrderItem orderDetail;
 	private int totalAmount;
 	private LocalDate purchaseDate;
 }

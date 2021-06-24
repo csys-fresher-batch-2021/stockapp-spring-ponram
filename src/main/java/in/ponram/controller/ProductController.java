@@ -1,5 +1,6 @@
 package in.ponram.controller;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +21,7 @@ import in.ponram.model.Product;
 import in.ponram.service.ProductManager;
 
 @RestController
-@RequestMapping("Products")
+@RequestMapping("api/v1/products")
 public class ProductController {
 
 	@Autowired
@@ -35,6 +36,7 @@ public class ProductController {
 	@PostMapping
 	public ResponseEntity<Message> saveProduct(@RequestBody Product product) {
 
+		product.setArrivalDate(LocalDate.now());
 		boolean isSaved = manager.addStock(product);
 		Message message = new Message();
 		HttpStatus httpStatus;
@@ -64,7 +66,7 @@ public class ProductController {
 	 * @param id
 	 * @return
 	 */
-	@DeleteMapping("{id}/Remove")
+	@DeleteMapping("{id}/remove")
 	public ResponseEntity<Message> removeProduct(@PathVariable("id") int id) {
 
 		boolean isDeleted = manager.deleteProduct(id);
@@ -79,24 +81,24 @@ public class ProductController {
 		}
 		return new ResponseEntity<>(message, httpStatus);
 	}
-	
+
 	/**
 	 * Patch method http://localhost:9090/Products/Add?id=1&quantity=10
 	 * 
 	 * @param id
 	 * @return
 	 */
-	@PatchMapping("Add")
-	public ResponseEntity<Message> updateProductQuantity(@RequestParam("id") int id, @RequestParam("quantity") int quantity) {
-		
-		boolean isUpdated = manager.increaseQuantity(id, quantity); 
+	@PatchMapping("add")
+	public ResponseEntity<Message> updateProductQuantity(@RequestParam("id") int id,
+			@RequestParam("quantity") int quantity) {
+
+		boolean isUpdated = manager.increaseQuantity(id, quantity);
 		Message message = new Message();
 		HttpStatus httpStatus;
-		if(isUpdated) {
+		if (isUpdated) {
 			message.setInfoMessage("Stock added successfuly");
 			httpStatus = HttpStatus.OK;
-		}
-		else {
+		} else {
 			message.setErrorMessage("Can't able to add stock");
 			httpStatus = HttpStatus.BAD_REQUEST;
 		}

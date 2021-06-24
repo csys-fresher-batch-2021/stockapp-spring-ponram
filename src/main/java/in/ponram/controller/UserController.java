@@ -14,7 +14,7 @@ import in.ponram.model.User;
 import in.ponram.service.UserManager;
 
 @RestController
-@RequestMapping("User")
+@RequestMapping("api/v1/user")
 public class UserController {
 
 	@Autowired
@@ -22,10 +22,11 @@ public class UserController {
 
 	/**
 	 * Post method http://localhost:9090/User/Signup
+	 * 
 	 * @param user
 	 * @return
 	 */
-	@PostMapping("Signup")
+	@PostMapping("api/v1/signup")
 	public ResponseEntity<Message> registerUser(@RequestBody User user) {
 		User saved = userManager.registration(user);
 		Message message = new Message();
@@ -42,19 +43,21 @@ public class UserController {
 
 	/**
 	 * Get method http://localhost:9090/User
+	 * 
 	 * @return
 	 */
 	@GetMapping
 	public Iterable<User> list() {
 		return userManager.getAllUsers();
 	}
-	
+
 	/**
 	 * Post method http://localhost:9090/User/Login
+	 * 
 	 * @param user
 	 * @return
 	 */
-	@PostMapping("Login")
+	@PostMapping("login")
 	public ResponseEntity<Message> login(@RequestBody User user) {
 		User userResult = userManager.login(user.getUsername(), user.getPassword());
 		Message message = new Message();
@@ -71,10 +74,11 @@ public class UserController {
 
 	/**
 	 * Post method http://localhost:9090/User/AdminLogin
+	 * 
 	 * @param user
 	 * @return
 	 */
-	@PostMapping("AdminLogin")
+	@PostMapping("adminLogin")
 	public ResponseEntity<Message> adminLogin(@RequestBody User user) {
 		User userResult = userManager.adminLogin(user.getUsername(), user.getPassword());
 		Message message = new Message();
