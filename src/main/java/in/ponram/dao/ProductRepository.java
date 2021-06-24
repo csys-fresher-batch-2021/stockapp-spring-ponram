@@ -28,7 +28,7 @@ public class ProductRepository {
 				Date.valueOf(product.getArrivalDate()), product.getAvailableQuantity(), product.getAvailableQuantity(),
 				product.getRate() };
 		int isSaved = jdbcTemplate.update(sql, params);
-		return isSaved == 1 ? true :false;
+		return isSaved == 1 ? true : false;
 
 	}
 
@@ -59,7 +59,7 @@ public class ProductRepository {
 		int isUpdated = jdbcTemplate.update(sql, id);
 		return isUpdated == 1 ? true : false;
 	}
-	
+
 	/**
 	 * This method is used to update product quantity by using product id from
 	 * database
@@ -74,4 +74,20 @@ public class ProductRepository {
 		int isUpdated = jdbcTemplate.update(sql, quantity, quantity, id);
 		return isUpdated == 1 ? true : false;
 	}
+
+	/**
+	 * This method is used to update product quantity by using product id from
+	 * database
+	 * 
+	 * @param brand
+	 * @return
+	 * @return
+	 */
+	public boolean updateReduceQuantity(int id, int quantity) {
+
+		String sql = "update stock set available_quantity = available_quantity - ? where product_id = ?";
+		int isUpdated = jdbcTemplate.update(sql, quantity, id);
+		return isUpdated == 1 ? true : false;
+	}
+
 }
